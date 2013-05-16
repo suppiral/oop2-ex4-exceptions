@@ -13,8 +13,8 @@ int main()
 {
 	cout << "Welcome to My Calculator!\n\n";
 
-	Calculator calc;
-	calc.calculate();
+	Calculator calc; // reads file from user and gets range of exercises
+	calc.calculate(); // calculates the exercises
 
 	system("PAUSE");
 

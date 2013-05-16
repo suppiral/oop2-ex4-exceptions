@@ -7,6 +7,7 @@
 
 
 using std::cout;
+using std::cerr;
 using std::cin;
 using std::endl;
 using std::stringstream;
@@ -45,8 +46,8 @@ int Calculator::openFile(ifstream& fd, string& filename)
 	fd.open(filename);
 	if (!fd) // if failed:
 	{
-		std::cerr << "Failed to open file : " << filename << std::endl;
-		std::cout << "try again: ";
+		cerr << "Failed to open file : " << filename << std::endl;
+		cout << "try again: ";
 		return BAD;
 	}
 	return 0;
@@ -61,9 +62,7 @@ void Calculator::getRange()
 
 	bool ranged = false; // checks for 'a-b' pattern of range
 	unsigned ex_num, tmp_num;
-	stringstream temp, linestream(str);
-
-	
+	stringstream temp, linestream(str);	
 
 	char ch;
 
@@ -109,6 +108,7 @@ void Calculator::addEx(unsigned ex_num)
 	_range.push_back(ex_num);
 }
 
+// calculate exercises in range from file
 void Calculator::calculate()
 {
 	// sort exercises
@@ -126,7 +126,7 @@ void Calculator::calculate()
 			_range.erase(_range.begin());
 		}
 	}
-	while (!_range.empty())
+	while (!_range.empty()) // if we reached EOF and there are still exercises to calculate:
 	{
 			cout << _range.front() << ". ERROR: Exercise doesn't exist"  << endl;
 			_range.erase(_range.begin());
@@ -183,7 +183,6 @@ string Calculator::calculateLine(string& line_str)
 		}
 	} 
 	// catch exceptions
-	catch (DivByZeroException&) { return "ERROR: Divide by zero"; }
 	catch (exception& e) { return e.what(); }
 
 	// generate result as a string

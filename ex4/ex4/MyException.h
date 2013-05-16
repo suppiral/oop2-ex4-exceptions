@@ -2,7 +2,10 @@
 
 #include <exception>
 
-class DivByZeroException
-{
+using std::exception;
 
+class DivByZeroException : public exception
+{
+public:
+	DivByZeroException() : exception("ERROR: Divide by zero") {}
 };
